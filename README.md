@@ -7,7 +7,7 @@
   ```
   
   
-Post to endpoint `/api/Storage` with following body content
+Post to endpoint `/api/Storage` with following body content. Given non existing container, container will be created.
 ```
 {
   "ContentType": "{{ Your Content Type }}",
