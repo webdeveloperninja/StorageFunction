@@ -1,15 +1,12 @@
-﻿using MediatR;
-using StorageFunction.Core.DTO;
-using StorageFunction.Core.Entities;
-using StorageFunction.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace StorageFunction.Core.Commands
+﻿namespace StorageFunction.Core.Commands
 {
+    using global::StorageFunction.Core.DTO;
+    using global::StorageFunction.Core.Entities;
+    using global::StorageFunction.Core.Interfaces;
+    using MediatR;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class StoreDataHandler : IRequestHandler<StorageRequest, StorageResponseDTO>
     {
         private IStorageProcessor _storageProcessor { get; set; }

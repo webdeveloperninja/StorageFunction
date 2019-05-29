@@ -17,7 +17,7 @@ namespace StorageFunction
         {
             builder.Services.AddTransient<StorageController>();
             builder.Services.AddTransient<IConfiguration, Configuration>();
-            builder.Services.AddTransient<IStorageProcessor, StorageProcessor>();
+            builder.Services.AddTransient<IStorageProcessor, BlobStorageProcessor>();
             builder.Services.AddTransient<IRequestDeserializer, RequestDeserializer>();
             builder.Services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
             builder.Services.AddLogging();

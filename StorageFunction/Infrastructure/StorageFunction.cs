@@ -1,21 +1,20 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using StorageFunction.Controllers;
-using StorageFunction.Core.DTO;
-using StorageFunction.Core.Interfaces;
-
 namespace StorageFunction
 {
+    using global::StorageFunction.Controllers;
+    using global::StorageFunction.Core.DTO;
+    using global::StorageFunction.Core.Exceptions;
+    using global::StorageFunction.Core.Interfaces;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.WebJobs;
+    using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Extensions.Logging;
+    using System.Threading.Tasks;
+
     public class StorageFunction
     {
         private StorageController _controller;
+
         private IRequestDeserializer _deserializer;
 
         public StorageFunction(StorageController controller, IRequestDeserializer deserializer)
@@ -30,8 +29,15 @@ namespace StorageFunction
             ILogger log)
         {
             var request = await _deserializer.Deserialize<StorageRequestDTO>(req);
-            var response = await _controller.Execute(request);
-            return (ActionResult)new OkObjectResult(response.ResourceUri);
+            try
+            {
+                var response = await _controller.Execute(request);
+                return (ActionResult)new OkObjectResult(response.ResourceUri);
+            }
+            catch (BadRequestException)
+            {
+                return (ActionResult)new BadRequestObjectResult("Request not valid");
+            }
         }
     }
 }

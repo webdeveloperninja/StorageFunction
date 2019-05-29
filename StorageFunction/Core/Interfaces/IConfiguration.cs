@@ -5,7 +5,5 @@
         string AccessKey { get; }
 
         string AccountName { get; }
-
-        string ContainerName { get; }
     }
 }

@@ -9,11 +9,11 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    internal class StorageProcessor : IStorageProcessor
+    internal class BlobStorageProcessor : IStorageProcessor
     {
         private IConfiguration _configuration;
 
-        public StorageProcessor(IConfiguration configuration)
+        public BlobStorageProcessor(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -22,9 +22,9 @@
         {
             CloudStorageAccount storageAccount = GetStorageAccount();
 
-            CloudBlobContainer container = await GetContainer(storageAccount);
+            CloudBlobContainer container = await GetContainer(storageAccount, request.ContainerName);
 
-            CloudBlockBlob blob = CreateBlob(container);
+            CloudBlockBlob blob = CreateBlob(container, request.ContentType);
 
             byte[] dataToUpload = CreateDataToUpload(request);
 
@@ -46,23 +46,23 @@
 
         private static byte[] CreateDataToUpload(StorageRequest request)
         {
-            return Convert.FromBase64String(request.Base64Image);
+            return Convert.FromBase64String(request.Base64Data);
         }
 
-        private static CloudBlockBlob CreateBlob(CloudBlobContainer container)
+        private static CloudBlockBlob CreateBlob(CloudBlobContainer container, string contentType)
         {
             var name = Guid.NewGuid().ToString("n");
             var blob = container.GetBlockBlobReference(name);
 
-            blob.Properties.ContentType = "image/jpeg";
+            blob.Properties.ContentType = contentType;
 
             return blob;
         }
 
-        private async Task<CloudBlobContainer> GetContainer(CloudStorageAccount storageAccount)
+        private async Task<CloudBlobContainer> GetContainer(CloudStorageAccount storageAccount, string containerName)
         {
             var client = storageAccount.CreateCloudBlobClient();
-            var container = client.GetContainerReference(_configuration.ContainerName);
+            var container = client.GetContainerReference(containerName);
 
             await container.CreateIfNotExistsAsync();
 

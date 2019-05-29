@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StorageFunction.Core.DTO
+﻿namespace StorageFunction.Core.DTO
 {
     public class StorageResponseDTO
     {
