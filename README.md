@@ -1,6 +1,6 @@
 # StorageFunction
  
- Add the following variables
+ Add the following storage account variables
  ```
   "Access_Key": "{{ Your Storage Access Key }}",
   "Account_Name": "{{ Your Storage Account Name}}"
