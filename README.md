@@ -7,8 +7,7 @@
   ```
   
   
-Post to endpoint with following body content
-`/api/Storage`
+Post to endpoint `/api/Storage` with following body content
 ```
 {
   "ContentType": "{{ Your Content Type }}",
