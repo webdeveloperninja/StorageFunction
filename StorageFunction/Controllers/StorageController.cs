@@ -4,7 +4,6 @@
     using global::StorageFunction.Core.Entities;
     using global::StorageFunction.Core.Exceptions;
     using MediatR;
-    using System;
     using System.Threading.Tasks;
 
     public class StorageController
@@ -32,7 +31,5 @@
 
             return await _mediator.Send(request);
         }
-
-
     }
 }
