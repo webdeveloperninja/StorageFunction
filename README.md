@@ -1,6 +1,6 @@
 # StorageFunction
  
- Add the following storage account variables
+ Add the following variables to your `local.settings.json` or enviroment variables
  ```
   "Access_Key": "{{ Your Storage Access Key }}",
   "Account_Name": "{{ Your Storage Account Name}}"
