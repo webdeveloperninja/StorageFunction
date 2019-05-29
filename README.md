@@ -8,6 +8,7 @@
   
   
 Post to endpoint with following body content
+`/api/Storage`
 ```
 {
   "ContentType": "{{ Your Content Type }}",
