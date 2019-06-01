@@ -32,7 +32,7 @@ namespace StorageFunction
             try
             {
                 var response = await _controller.Execute(request);
-                return (ActionResult)new OkObjectResult(response.ResourceUri);
+                return (ActionResult)new OkObjectResult(response);
             }
             catch (BadRequestException)
             {
