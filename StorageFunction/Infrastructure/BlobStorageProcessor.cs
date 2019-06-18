@@ -63,8 +63,10 @@
         {
             var client = storageAccount.CreateCloudBlobClient();
             var container = client.GetContainerReference(containerName);
+            var options = new BlobRequestOptions();
+            var context = new OperationContext();
 
-            await container.CreateIfNotExistsAsync();
+            await container.CreateIfNotExistsAsync(BlobContainerPublicAccessType.Container, options, context);
 
             return container;
         }
